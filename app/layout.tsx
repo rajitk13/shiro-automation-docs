@@ -13,10 +13,52 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 })
 
+const BASE_URL = "https://shiro-docs.rajit.cc"
+
 export const metadata: Metadata = {
-  title: "Shiro Automation - Documentation",
+  metadataBase: new URL(BASE_URL),
+  title: {
+    default: "Shiro Automation - Documentation",
+    template: "%s | Shiro Docs",
+  },
   description:
     "AI-Native CI Workflow Runtime. Portable workflow orchestration for CI/CD environments.",
+  keywords: [
+    "shiro",
+    "automation",
+    "CI/CD",
+    "workflow",
+    "AI",
+    "GitLab",
+    "GitHub",
+    "documentation",
+  ],
+  authors: [{ name: "Shiro Automation" }],
+  creator: "Shiro Automation",
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    url: BASE_URL,
+    siteName: "Shiro Automation Docs",
+    title: "Shiro Automation - Documentation",
+    description:
+      "AI-Native CI Workflow Runtime. Portable workflow orchestration for CI/CD environments.",
+    images: [
+      {
+        url: "/logo.png",
+        width: 512,
+        height: 512,
+        alt: "Shiro Automation",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary",
+    title: "Shiro Automation - Documentation",
+    description:
+      "AI-Native CI Workflow Runtime. Portable workflow orchestration for CI/CD environments.",
+    images: ["/logo.png"],
+  },
   icons: {
     icon: "/favicon.ico",
     apple: "/apple-touch-icon.png",

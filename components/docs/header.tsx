@@ -162,9 +162,10 @@ export function DocsHeader() {
             <Link
               href="https://shiro-automation.rajit.cc"
               target="_blank"
+              rel="noopener noreferrer"
               className="hidden lg:flex items-center gap-1.5 rounded-md border border-border bg-card px-3 py-1.5 text-xs font-medium text-foreground hover:bg-muted transition-colors ml-1"
             >
-              Main site ↗
+              shiro-automation.rajit.cc ↗
             </Link>
           </div>
         </div>
