@@ -178,3 +178,36 @@ code {
   );
   background-size: 20px 20px;
 }
+
+/* ============================================
+   MOBILE / RESPONSIVE
+   ============================================ */
+
+/* Tables scroll horizontally on small screens */
+.docs-content table {
+  display: block;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  white-space: nowrap;
+  width: 100%;
+}
+
+/* Responsive doc headings */
+@media (max-width: 640px) {
+  .docs-content h1 {
+    font-size: 1.75rem;
+    line-height: 2.25rem;
+  }
+  .docs-content h2 {
+    font-size: 1.375rem;
+    line-height: 1.875rem;
+  }
+  .docs-content h3 {
+    font-size: 1.125rem;
+    line-height: 1.625rem;
+  }
+  .docs-content p.text-xl {
+    font-size: 1rem;
+    line-height: 1.625rem;
+  }
+}

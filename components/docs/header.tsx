@@ -33,6 +33,11 @@ function MobileNav() {
   const [open, setOpen] = React.useState(false)
   const pathname = usePathname()
 
+  React.useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setOpen(false)
+  }, [pathname])
+
   return (
     <Sheet open={open} onOpenChange={setOpen}>
       <SheetTrigger asChild>
