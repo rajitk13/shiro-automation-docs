@@ -8,10 +8,21 @@ export const metadata: Metadata = {
 function CodeBlock({
   children,
   language = "bash",
+  plain = false,
 }: {
   children: string
   language?: string
+  plain?: boolean
 }) {
+  if (plain) {
+    return (
+      <pre className="overflow-x-auto bg-[hsl(var(--code-bg))] p-4 text-sm">
+        <code className="text-slate-300 font-mono whitespace-pre">
+          {children}
+        </code>
+      </pre>
+    )
+  }
   return (
     <div className="overflow-hidden rounded-lg border border-border bg-[hsl(var(--code-bg))]">
       <div className="flex items-center justify-between border-b border-border/50 px-4 py-2">
@@ -97,28 +108,81 @@ export default function CIPipelinePage() {
 }`}</CodeBlock>
       </div>
 
-      <div className="space-y-4">
-        <h2 className="text-2xl font-semibold">Run in GitLab CI</h2>
-        <CodeBlock language="yaml">{`deploy:
-  image: docker:latest
-  script:
-    - docker run --rm
-        -v $PWD:/workspace -w /workspace
-        -e COMMIT_SHA=$CI_COMMIT_SHA
-        ghcr.io/rajitk13/shiro-automation:latest
-        shiro run`}</CodeBlock>
-      </div>
+      <div className="space-y-5">
+        <h2 className="text-2xl font-semibold">Add to your CI</h2>
 
-      <div className="space-y-4">
-        <h2 className="text-2xl font-semibold">Run in GitHub Actions</h2>
-        <CodeBlock language="yaml">{`- name: Run Shiro pipeline
-  run: |
-    docker run --rm \\
-      -v \${{ github.workspace }}:/workspace \\
-      -w /workspace \\
-      -e COMMIT_SHA=\${{ github.sha }} \\
-      ghcr.io/rajitk13/shiro-automation:latest \\
-      shiro run`}</CodeBlock>
+        {/* GitLab */}
+        <div className="rounded-lg border border-border overflow-hidden">
+          <div className="flex items-center gap-2 border-b border-border bg-muted/40 px-4 py-2.5">
+            <span className="rounded bg-orange-500/15 px-2 py-0.5 text-xs font-semibold text-orange-400">
+              GitLab CI
+            </span>
+            <span className="text-xs text-muted-foreground font-mono">
+              .gitlab-ci.yml
+            </span>
+          </div>
+          <CodeBlock language="yaml" plain>{`stages:
+  - deploy
+
+ci-pipeline:
+  stage: deploy
+  image: ghcr.io/rajitk13/shiro-automation:latest
+  variables:
+    GITLAB_TOKEN: $GL_TOKEN
+  script:
+    - shiro run
+        -workflow .shiro/workflows/pipeline.json
+        -config .shiro/config.yaml
+        -state-store gitlab
+  artifacts:
+    paths:
+      - .shiro/state/
+    expire_in: 1 day
+  only:
+    - main
+    - merge_requests`}</CodeBlock>
+        </div>
+
+        {/* GitHub Actions */}
+        <div className="rounded-lg border border-border overflow-hidden">
+          <div className="flex items-center gap-2 border-b border-border bg-muted/40 px-4 py-2.5">
+            <span className="rounded bg-slate-500/15 px-2 py-0.5 text-xs font-semibold text-slate-400">
+              GitHub Actions
+            </span>
+            <span className="text-xs text-muted-foreground font-mono">
+              .github/workflows/pipeline.yml
+            </span>
+          </div>
+          <CodeBlock language="yaml" plain>{`name: CI Pipeline
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  pipeline:
+    runs-on: ubuntu-latest
+    container:
+      image: ghcr.io/rajitk13/shiro-automation:latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Run Shiro pipeline
+        env:
+          GITHUB_TOKEN: \${{ secrets.GITHUB_TOKEN }}
+          COMMIT_SHA: \${{ github.sha }}
+        run: |
+          shiro run \\
+            -workflow .shiro/workflows/pipeline.json \\
+            -config .shiro/config.yaml \\
+            -state-store github
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: shiro-state
+          path: .shiro/state/`}</CodeBlock>
+        </div>
       </div>
 
       <div className="rounded-lg border border-border bg-card p-5 space-y-2">

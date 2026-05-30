@@ -30,14 +30,56 @@ export default async function DocsPage() {
           Welcome to Shiro Docs
         </h1>
         <p className="text-lg text-muted-foreground max-w-2xl">
-          Shiro is a portable, zero-infrastructure workflow runtime for CI/CD
-          environments with AI-native capabilities. Single binary. No servers.
-          Runs inside your existing CI.
+          Shiro runs <strong>inside your existing CI runner</strong> as a Docker
+          image — no new infrastructure, no agents. Define workflows in JSON,
+          trigger them from GitLab CI or GitHub Actions, and get AI-native
+          capabilities out of the box.
         </p>
+      </div>
+
+      {/* CI quick-start banner */}
+      <div className="rounded-lg border border-primary/30 bg-primary/5 p-5 space-y-3">
+        <div className="flex items-center gap-2">
+          <GitBranch className="size-4 text-primary" />
+          <span className="text-sm font-semibold">CI users — start here</span>
+          <span className="ml-auto text-xs text-muted-foreground">
+            GitLab CI · GitHub Actions
+          </span>
+        </div>
+        <p className="text-sm text-muted-foreground">
+          Use the Shiro Docker image directly in your pipeline. No install step
+          needed.
+        </p>
+        <pre className="overflow-x-auto rounded-lg bg-[hsl(var(--code-bg))] border border-border p-4 text-sm">
+          <code className="text-slate-300 font-mono whitespace-pre">{`# .gitlab-ci.yml
+shiro:
+  image: ghcr.io/rajitk13/shiro-automation:latest
+  script:
+    - shiro run -workflow .shiro/workflows/my-workflow.json -state-store gitlab`}</code>
+        </pre>
+        <Link
+          href="/docs/quickstart"
+          className="inline-flex items-center gap-1.5 text-sm font-medium text-primary hover:underline"
+        >
+          Full setup guide (3 steps) <ArrowRight className="size-3" />
+        </Link>
       </div>
 
       {/* Quick nav cards */}
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <Link
+          href="/docs/cicd/gitlab"
+          className="group rounded-lg border border-border bg-card p-5 transition-all hover:border-primary/50 hover:bg-card/80"
+        >
+          <div className="flex items-center gap-2 mb-2">
+            <GitBranch className="size-4 text-primary" />
+            <span className="font-semibold text-sm">CI/CD Integration</span>
+            <ArrowRight className="size-3 text-muted-foreground ml-auto group-hover:text-primary transition-colors" />
+          </div>
+          <p className="text-xs text-muted-foreground">
+            GitLab CI, GitHub Actions and human-in-loop approvals
+          </p>
+        </Link>
         <Link
           href="/docs/quickstart"
           className="group rounded-lg border border-border bg-card p-5 transition-all hover:border-primary/50 hover:bg-card/80"
@@ -48,7 +90,20 @@ export default async function DocsPage() {
             <ArrowRight className="size-3 text-muted-foreground ml-auto group-hover:text-primary transition-colors" />
           </div>
           <p className="text-xs text-muted-foreground">
-            Install Shiro and run your first workflow in 5 minutes
+            Add Shiro to your CI pipeline in 3 steps
+          </p>
+        </Link>
+        <Link
+          href="/docs/examples/ai-code-review"
+          className="group rounded-lg border border-border bg-card p-5 transition-all hover:border-primary/50 hover:bg-card/80"
+        >
+          <div className="flex items-center gap-2 mb-2">
+            <Sparkles className="size-4 text-primary" />
+            <span className="font-semibold text-sm">AI Code Review</span>
+            <ArrowRight className="size-3 text-muted-foreground ml-auto group-hover:text-primary transition-colors" />
+          </div>
+          <p className="text-xs text-muted-foreground">
+            Copy-paste example: AI review on every merge request
           </p>
         </Link>
         <Link
@@ -61,20 +116,7 @@ export default async function DocsPage() {
             <ArrowRight className="size-3 text-muted-foreground ml-auto group-hover:text-primary transition-colors" />
           </div>
           <p className="text-xs text-muted-foreground">
-            Learn workflows, DAG execution, modules and state storage
-          </p>
-        </Link>
-        <Link
-          href="/docs/cli/run"
-          className="group rounded-lg border border-border bg-card p-5 transition-all hover:border-primary/50 hover:bg-card/80"
-        >
-          <div className="flex items-center gap-2 mb-2">
-            <Terminal className="size-4 text-primary" />
-            <span className="font-semibold text-sm">CLI Reference</span>
-            <ArrowRight className="size-3 text-muted-foreground ml-auto group-hover:text-primary transition-colors" />
-          </div>
-          <p className="text-xs text-muted-foreground">
-            Full reference for shiro init, run, validate, and data
+            Workflows, DAG execution, modules and state storage
           </p>
         </Link>
         <Link
@@ -91,29 +133,16 @@ export default async function DocsPage() {
           </p>
         </Link>
         <Link
-          href="/docs/cicd/gitlab"
+          href="/docs/cli/run"
           className="group rounded-lg border border-border bg-card p-5 transition-all hover:border-primary/50 hover:bg-card/80"
         >
           <div className="flex items-center gap-2 mb-2">
-            <GitBranch className="size-4 text-primary" />
-            <span className="font-semibold text-sm">CI/CD Integration</span>
+            <Terminal className="size-4 text-primary" />
+            <span className="font-semibold text-sm">CLI Reference</span>
             <ArrowRight className="size-3 text-muted-foreground ml-auto group-hover:text-primary transition-colors" />
           </div>
           <p className="text-xs text-muted-foreground">
-            GitLab CI, GitHub Actions and human-in-loop approvals
-          </p>
-        </Link>
-        <Link
-          href="/tools/validator"
-          className="group rounded-lg border border-border bg-card p-5 transition-all hover:border-primary/50 hover:bg-card/80"
-        >
-          <div className="flex items-center gap-2 mb-2">
-            <Sparkles className="size-4 text-primary" />
-            <span className="font-semibold text-sm">Workflow Validator</span>
-            <ArrowRight className="size-3 text-muted-foreground ml-auto group-hover:text-primary transition-colors" />
-          </div>
-          <p className="text-xs text-muted-foreground">
-            Interactive browser-based workflow JSON validator
+            Full reference for shiro init, run, validate, and data
           </p>
         </Link>
       </div>
@@ -194,17 +223,26 @@ export default async function DocsPage() {
       </div>
 
       <div className="rounded-lg border border-border bg-card p-6">
-        <h2 className="text-xl font-semibold mb-2">Quick Start</h2>
+        <h2 className="text-xl font-semibold mb-2">Add to your CI today</h2>
         <p className="text-muted-foreground mb-4">
-          Get up and running with Shiro in under 5 minutes.
+          Three files. One push. Shiro runs in your existing GitLab CI or GitHub
+          Actions pipeline — no new infrastructure required.
         </p>
-        <Link
-          href="/docs/quickstart"
-          className="inline-flex items-center gap-2 rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:opacity-90 transition-opacity"
-        >
-          Get Started
-          <ArrowRight className="size-4" />
-        </Link>
+        <div className="flex flex-wrap gap-3">
+          <Link
+            href="/docs/quickstart"
+            className="inline-flex items-center gap-2 rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:opacity-90 transition-opacity"
+          >
+            Get Started
+            <ArrowRight className="size-4" />
+          </Link>
+          <Link
+            href="/docs/examples/ci-pipeline"
+            className="inline-flex items-center gap-2 rounded-md border border-border px-4 py-2 text-sm font-medium hover:bg-muted transition-colors"
+          >
+            View CI Example
+          </Link>
+        </div>
       </div>
 
       <div className="space-y-4">
