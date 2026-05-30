@@ -60,9 +60,11 @@ export const metadata: Metadata = {
     images: ["/logo.png"],
   },
   icons: {
-    icon: "/favicon.ico",
-    apple: "/apple-touch-icon.png",
-    shortcut: "/icon.png",
+    icon: [
+      { url: "/favicon.ico", sizes: "32x32" },
+      { url: "/logo.png", sizes: "512x512", type: "image/png" },
+    ],
+    apple: "/logo.png",
   },
   manifest: "/manifest.json",
 }
@@ -84,6 +86,9 @@ export default function RootLayout({
             __html: `(function(){try{var t=localStorage.getItem('shiro-theme');if(t==='light'){document.documentElement.classList.remove('dark')}else{document.documentElement.classList.add('dark')}}catch(e){}})()`,
           }}
         />
+        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="512x512" href="/logo.png" />
+        <link rel="apple-touch-icon" href="/logo.png" />
       </head>
       <body className="min-h-full flex flex-col bg-background text-foreground">
         <ThemeProvider>{children}</ThemeProvider>
