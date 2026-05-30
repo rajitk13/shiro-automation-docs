@@ -1,14 +1,13 @@
-const OPTS = {
-  headers: { Accept: "application/vnd.github+json" },
-  next: { revalidate: 3600 },
-}
+import { unstable_cache } from "next/cache"
 
-export async function getLatestRelease(repo: string): Promise<string> {
+const HEADERS = { Accept: "application/vnd.github+json" }
+
+async function fetchVersion(repo: string): Promise<string> {
   try {
     // Try published releases first
     const relRes = await fetch(
       `https://api.github.com/repos/${repo}/releases/latest`,
-      OPTS
+      { headers: HEADERS }
     )
     if (relRes.ok) {
       const rel = await relRes.json()
@@ -18,7 +17,7 @@ export async function getLatestRelease(repo: string): Promise<string> {
     // Fall back to latest git tag
     const tagRes = await fetch(
       `https://api.github.com/repos/${repo}/tags?per_page=1`,
-      OPTS
+      { headers: HEADERS }
     )
     if (tagRes.ok) {
       const tags = await tagRes.json()
@@ -30,3 +29,9 @@ export async function getLatestRelease(repo: string): Promise<string> {
     return "latest"
   }
 }
+
+export const getLatestRelease = unstable_cache(
+  (repo: string) => fetchVersion(repo),
+  ["github-latest-release"],
+  { revalidate: 3600 }
+)
