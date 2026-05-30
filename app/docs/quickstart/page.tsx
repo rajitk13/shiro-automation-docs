@@ -44,16 +44,20 @@ export default function QuickstartPage() {
             Install Shiro
           </h2>
           <p className="text-muted-foreground">
-            Download and install Shiro using the auto-detect script, or download
-            a pre-built binary.
+            The recommended way is via Docker — no dependencies required. Curl
+            scripts are available if you prefer a local binary.
           </p>
-          <CodeBlock>{`# Auto-detect and install (Recommended)
-curl -sSL https://raw.githubusercontent.com/rajitk13/shiro-automation/master/scripts/install-auto.sh | bash
+          <CodeBlock>{`# Recommended: pull the Docker image
+docker pull ghcr.io/rajitk13/shiro-automation:latest
 
-# Or download manually for your platform
-curl -LO https://github.com/rajitk13/shiro-automation/releases/latest/download/shiro-darwin-arm64
-chmod +x shiro-darwin-arm64
-sudo mv shiro-darwin-arm64 /usr/local/bin/shiro`}</CodeBlock>
+# Run workflows via Docker (mount your project)
+docker run --rm -v $(pwd):/workspace -w /workspace \\
+  ghcr.io/rajitk13/shiro-automation:latest shiro run`}</CodeBlock>
+
+          <p className="text-sm text-muted-foreground mt-2">
+            Prefer a local binary? Use the auto-detect script:
+          </p>
+          <CodeBlock>{`curl -sSL https://raw.githubusercontent.com/rajitk13/shiro-automation/master/scripts/install-auto.sh | bash`}</CodeBlock>
         </div>
 
         <div className="space-y-3">
