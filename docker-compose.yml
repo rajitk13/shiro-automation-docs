@@ -1,0 +1,6 @@
+services:
+  shiro-automation-docs:
+    build: .
+    ports:
+      - "3325:3325"
+    restart: unless-stopped
