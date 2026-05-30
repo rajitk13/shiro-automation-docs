@@ -46,8 +46,11 @@ function MobileNav() {
           <span className="sr-only">Toggle menu</span>
         </Button>
       </SheetTrigger>
-      <SheetContent side="left" className="w-72 bg-background p-0">
-        <div className="flex h-14 items-center border-b border-border px-4">
+      <SheetContent
+        side="left"
+        className="w-72 bg-background p-0 flex flex-col"
+      >
+        <div className="flex h-14 shrink-0 items-center border-b border-border px-4">
           <Link
             href="/"
             className="flex items-center gap-2"
@@ -63,7 +66,7 @@ function MobileNav() {
             <span className="font-semibold">Shiro</span>
           </Link>
         </div>
-        <div className="overflow-y-auto py-4 px-3">
+        <div className="flex-1 min-h-0 overflow-y-auto py-4 px-3">
           <nav className="space-y-4">
             {navItems.map((section: NavItem) => (
               <div key={section.title}>

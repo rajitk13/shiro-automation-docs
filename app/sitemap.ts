@@ -31,6 +31,10 @@ const routes: string[] = [
   "/docs/advanced/custom-modules",
   "/docs/advanced/development",
   "/docs/advanced/api",
+  "/docs/examples/hello-world",
+  "/docs/examples/ci-pipeline",
+  "/docs/examples/ai-code-review",
+  "/docs/examples/slack-notifications",
   "/tools/validator",
 ]
 

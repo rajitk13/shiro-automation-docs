@@ -20,6 +20,7 @@ import {
   Sparkles,
   GitBranch,
   Workflow,
+  FileCode,
 } from "lucide-react"
 
 export interface NavItem {
@@ -37,6 +38,19 @@ export const navItems: NavItem[] = [
       { title: "Introduction", href: "/docs" },
       { title: "Quick Start", href: "/docs/quickstart" },
       { title: "Installation", href: "/docs/installation" },
+    ],
+  },
+  {
+    title: "Examples",
+    icon: <FileCode className="size-4" />,
+    items: [
+      { title: "Hello World", href: "/docs/examples/hello-world" },
+      { title: "CI Pipeline", href: "/docs/examples/ci-pipeline" },
+      { title: "AI Code Review", href: "/docs/examples/ai-code-review" },
+      {
+        title: "Slack Notifications",
+        href: "/docs/examples/slack-notifications",
+      },
     ],
   },
   {
