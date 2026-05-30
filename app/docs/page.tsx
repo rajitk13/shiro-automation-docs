@@ -1,5 +1,6 @@
 import { Metadata } from "next"
 import Link from "next/link"
+import { getLatestRelease } from "@/lib/github"
 import {
   ArrowRight,
   Zap,
@@ -16,13 +17,14 @@ export const metadata: Metadata = {
     "Get started with Shiro Automation - AI-Native CI Workflow Runtime",
 }
 
-export default function DocsPage() {
+export default async function DocsPage() {
+  const version = await getLatestRelease("rajitk13/shiro-automation")
   return (
     <div className="space-y-10">
       {/* Welcome header */}
       <div className="pb-6 border-b border-border">
         <div className="text-sm font-medium text-primary mb-3">
-          Shiro Automation v1.0
+          Shiro Automation {version}
         </div>
         <h1 className="text-4xl font-bold tracking-tight mb-4">
           Welcome to Shiro Docs
