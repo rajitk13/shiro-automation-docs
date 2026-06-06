@@ -86,6 +86,11 @@ shiro run -workflow <path> [flags]`}</CodeBlock>
               <td className="py-3">false</td>
               <td className="py-3">Validate workflow without executing</td>
             </tr>
+            <tr className="border-b border-border/50">
+              <td className="py-3 font-mono text-accent">-quiet</td>
+              <td className="py-3">false</td>
+              <td className="py-3">Suppress output, only show errors</td>
+            </tr>
           </tbody>
         </table>
       </div>
@@ -132,6 +137,14 @@ Total Steps: 3
 2. Step: step2
    Type: ai.generate
    Depends On: [step1]`}</CodeBlock>
+        </div>
+
+        <div className="space-y-2">
+          <h3 className="text-lg font-medium">Quiet Mode</h3>
+          <p className="text-sm text-muted-foreground">
+            Suppress output, only show errors
+          </p>
+          <CodeBlock>{`shiro run -quiet`}</CodeBlock>
         </div>
 
         <div className="space-y-2">

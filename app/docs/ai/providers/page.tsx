@@ -3,7 +3,7 @@ import Link from "next/link"
 
 export const metadata: Metadata = {
   title: "AI Providers - Shiro Documentation",
-  description: "OpenAI-compatible and Ollama AI providers for Shiro",
+  description: "OpenAI-compatible, Ollama, and Gemini AI providers for Shiro",
 }
 
 function CodeBlock({
@@ -58,9 +58,10 @@ export default function AIProvidersPage() {
         <div className="text-sm font-medium text-primary mb-2">AI Features</div>
         <h1 className="text-4xl font-bold tracking-tight mb-4">AI Providers</h1>
         <p className="text-xl text-muted-foreground">
-          Shiro ships two built-in provider implementations:{" "}
-          <strong>OpenAI-compatible</strong> (cloud or self-hosted) and{" "}
-          <strong>Ollama</strong> (local models). Both implement the same{" "}
+          Shiro ships three built-in provider implementations:{" "}
+          <strong>OpenAI-compatible</strong> (cloud or self-hosted),{" "}
+          <strong>Ollama</strong> (local models), and <strong>Gemini</strong>{" "}
+          (Google AI Studio and Vertex AI). All implement the same{" "}
           <code>Provider</code> interface so they are interchangeable in
           workflow steps.
         </p>
@@ -123,6 +124,25 @@ export default function AIProvidersPage() {
               • Pull models with{" "}
               <code className="text-xs">ollama pull &lt;model&gt;</code>
             </li>
+          </ul>
+        </ProviderCard>
+
+        {/* Gemini */}
+        <ProviderCard name="gemini" badge="Google AI">
+          <p className="text-sm text-muted-foreground">
+            Google&apos;s Gemini models via Google AI Studio or Vertex AI.
+            Supports Gemini 1.5 Pro and other Gemini models.
+          </p>
+          <ul className="text-sm text-muted-foreground space-y-1">
+            <li>
+              • Requires <code className="text-xs text-primary">api_key</code>
+            </li>
+            <li>
+              • Two modes: Google AI Studio (API key) or Vertex AI (OAuth)
+            </li>
+            <li>• Supports streaming</li>
+            <li>• Multi-modal support (text, images, code)</li>
+            <li>• Configurable project ID and location for Vertex AI</li>
           </ul>
         </ProviderCard>
       </div>
@@ -217,11 +237,73 @@ export default function AIProvidersPage() {
 ollama pull llama3:8b`}</CodeBlock>
       </div>
 
+      {/* Gemini config */}
+      <div className="space-y-4">
+        <h2 className="text-2xl font-semibold">Gemini Provider Config</h2>
+        <CodeBlock language=".shiro/config.yaml">{`models:
+  # Gemini (Google AI Studio)
+  gemini:
+    provider: gemini
+    model: gemini-1.5-pro
+    api_key: "{{env.GEMINI_API_KEY}}"
+    api_type: "google-ai-studio"
+
+  # Gemini (Vertex AI)
+  gemini-vertex:
+    provider: gemini
+    model: gemini-1.5-pro
+    api_key: "{{env.GOOGLE_ACCESS_TOKEN}}"
+    api_type: "vertex-ai"
+    project_id: "{{env.GOOGLE_PROJECT_ID}}"
+    location: "us-central1"`}</CodeBlock>
+
+        <div className="overflow-x-auto">
+          <table className="w-full text-sm">
+            <thead>
+              <tr className="border-b border-border">
+                <th className="py-2 text-left font-semibold pr-4 w-36">
+                  Field
+                </th>
+                <th className="py-2 text-left font-semibold">Description</th>
+              </tr>
+            </thead>
+            <tbody className="text-muted-foreground">
+              {[
+                ["model", "Model name (e.g. gemini-1.5-pro, gemini-1.5-flash)"],
+                [
+                  "api_key",
+                  "API key for Google AI Studio or access token for Vertex AI",
+                ],
+                [
+                  "api_type",
+                  "Either 'google-ai-studio' (API key) or 'vertex-ai' (OAuth)",
+                ],
+                [
+                  "project_id",
+                  "Google Cloud project ID (required for Vertex AI)",
+                ],
+                [
+                  "location",
+                  "Vertex AI location (e.g. us-central1, required for Vertex AI)",
+                ],
+              ].map(([f, d]) => (
+                <tr key={f} className="border-b border-border/50">
+                  <td className="py-3 pr-4">
+                    <code className="text-xs text-primary">{f}</code>
+                  </td>
+                  <td className="py-3">{d}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
       {/* Provider interface */}
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold">Provider Interface</h2>
         <p className="text-muted-foreground text-sm">
-          Both providers implement the same Go interface — they are fully
+          All providers implement the same Go interface — they are fully
           interchangeable. See the{" "}
           <Link
             href="/docs/advanced/api"

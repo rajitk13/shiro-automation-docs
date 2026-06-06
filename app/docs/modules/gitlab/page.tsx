@@ -51,20 +51,36 @@ export default function GitLabModulePage() {
           </thead>
           <tbody className="text-muted-foreground">
             <tr className="border-b border-border/50">
-              <td className="py-3 font-mono text-accent">comment_mr</td>
-              <td className="py-3">Post a comment on a merge request</td>
+              <td className="py-3 font-mono text-accent">post_comment</td>
+              <td className="py-3">
+                Post a general comment on a merge request
+              </td>
             </tr>
             <tr className="border-b border-border/50">
-              <td className="py-3 font-mono text-accent">approve_mr</td>
-              <td className="py-3">Approve a merge request</td>
+              <td className="py-3 font-mono text-accent">
+                post_inline_comments
+              </td>
+              <td className="py-3">
+                Post inline line comments on a merge request
+              </td>
             </tr>
             <tr className="border-b border-border/50">
-              <td className="py-3 font-mono text-accent">get_mr</td>
-              <td className="py-3">Get merge request details</td>
+              <td className="py-3 font-mono text-accent">get_commit_info</td>
+              <td className="py-3">Get commit details</td>
             </tr>
             <tr className="border-b border-border/50">
-              <td className="py-3 font-mono text-accent">create_issue</td>
-              <td className="py-3">Create a new issue</td>
+              <td className="py-3 font-mono text-accent">get_user_info</td>
+              <td className="py-3">Get user information</td>
+            </tr>
+            <tr className="border-b border-border/50">
+              <td className="py-3 font-mono text-accent">
+                get_mr_participants
+              </td>
+              <td className="py-3">Get merge request participants</td>
+            </tr>
+            <tr className="border-b border-border/50">
+              <td className="py-3 font-mono text-accent">get_files_changed</td>
+              <td className="py-3">Get list of changed files in MR</td>
             </tr>
           </tbody>
         </table>
@@ -78,29 +94,59 @@ export default function GitLabModulePage() {
           <CodeBlock>{`{
   "id": "post_review",
   "type": "gitlab",
+  "depends_on": ["ai_review"],
   "config": {
-    "operation": "comment_mr",
-    "project_id": "{{env.CI_PROJECT_ID}}",
-    "mr_iid": "{{env.CI_MERGE_REQUEST_IID}}",
-    "token": "{{env.CI_JOB_TOKEN}}",
-    "body": "## AI Code Review\\n\\n{{steps.ai_review.text}}"
-  },
-  "depends_on": ["ai_review"]
+    "operation": "post_comment",
+    "body": "{{steps.ai_review.content}}"
+  }
 }`}</CodeBlock>
         </div>
 
         <div className="space-y-2">
-          <h3 className="text-lg font-medium">Get MR Details</h3>
+          <h3 className="text-lg font-medium">
+            Post Inline Comments (Text Format)
+          </h3>
           <CodeBlock>{`{
-  "id": "get_mr_info",
+  "id": "post_inline_comments",
   "type": "gitlab",
+  "depends_on": ["ai_review"],
   "config": {
-    "operation": "get_mr",
-    "project_id": "{{env.CI_PROJECT_ID}}",
-    "mr_iid": "{{env.CI_MERGE_REQUEST_IID}}",
-    "token": "{{env.CI_JOB_TOKEN}}"
+    "operation": "post_inline_comments",
+    "body": "{{steps.ai_review.content}}",
+    "output_format": "text",
+    "api_type": "discussions",
+    "dedup": true
   }
 }`}</CodeBlock>
+          <p className="text-sm text-muted-foreground">
+            AI prompt for text format:{" "}
+            <code className="text-xs">
+              Review this code diff and provide comments in format:
+              &apos;path/to/file.go:42 - issue description&apos;
+            </code>
+          </p>
+        </div>
+
+        <div className="space-y-2">
+          <h3 className="text-lg font-medium">
+            Post Inline Comments (JSON Format)
+          </h3>
+          <CodeBlock>{`{
+  "id": "post_inline_comments",
+  "type": "gitlab",
+  "depends_on": ["ai_review"],
+  "config": {
+    "operation": "post_inline_comments",
+    "comments": "{{steps.ai_review.comments}}",
+    "output_format": "json",
+    "api_type": "discussions",
+    "dedup": true
+  }
+}`}</CodeBlock>
+          <p className="text-sm text-muted-foreground">
+            AI prompt for JSON format: Return JSON array with file, line, and
+            comment fields
+          </p>
         </div>
       </div>
 

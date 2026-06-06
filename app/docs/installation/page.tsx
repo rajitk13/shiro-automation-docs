@@ -69,6 +69,49 @@ docker run --rm ghcr.io/rajitk13/shiro-automation:latest shiro version`}</CodeBl
             Pin to a specific build tag for reproducible CI:
           </p>
           <CodeBlock>{`docker pull ghcr.io/rajitk13/shiro-automation:v20260525-103919-ba52c2c`}</CodeBlock>
+
+          <div className="mt-4 space-y-2">
+            <h3 className="text-sm font-semibold">Image Variants</h3>
+            <p className="text-sm text-muted-foreground">
+              Two image variants are available:
+            </p>
+            <div className="space-y-3">
+              <div className="rounded-lg border border-border/50 bg-card p-3">
+                <div className="flex items-center gap-2 mb-1">
+                  <code className="text-xs text-primary font-mono">slim</code>
+                  <span className="text-xs text-muted-foreground">
+                    (default)
+                  </span>
+                </div>
+                <p className="text-xs text-muted-foreground">
+                  Alpine base with shiro binary, git, and curl. Use for built-in
+                  modules and pre-built binary subprocess modules. Small image
+                  size.
+                </p>
+                <CodeBlock language="bash">{`docker pull ghcr.io/rajitk13/shiro-automation:latest`}</CodeBlock>
+              </div>
+              <div className="rounded-lg border border-border/50 bg-card p-3">
+                <div className="flex items-center gap-2 mb-1">
+                  <code className="text-xs text-primary font-mono">
+                    toolchain
+                  </code>
+                  <span className="text-xs text-muted-foreground">
+                    (latest-go)
+                  </span>
+                </div>
+                <p className="text-xs text-muted-foreground">
+                  Based on golang:1.23-alpine with full Go toolchain. Use only
+                  for go-run subprocess modules.
+                </p>
+                <CodeBlock language="bash">{`docker pull ghcr.io/rajitk13/shiro-automation:latest-go`}</CodeBlock>
+              </div>
+            </div>
+            <p className="text-xs text-muted-foreground">
+              Both variants support linux/amd64 and linux/arm64, and embed the
+              release version (use{" "}
+              <code className="text-xs">shiro --version</code> to check).
+            </p>
+          </div>
         </div>
 
         {/* ── Option 2: Auto-Detect Script ── */}
