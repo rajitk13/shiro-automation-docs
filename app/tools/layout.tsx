@@ -33,7 +33,13 @@ export default function ToolsLayout({
               href="/tools/validator"
               className="text-sm text-muted-foreground hover:text-foreground transition-colors"
             >
-              Tools
+              Validator
+            </Link>
+            <Link
+              href="/tools/preview"
+              className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+            >
+              Preview
             </Link>
             <Button size="sm" asChild>
               <Link href="/docs/quickstart">Get Started</Link>

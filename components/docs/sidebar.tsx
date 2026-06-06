@@ -117,7 +117,10 @@ export const navItems: NavItem[] = [
   {
     title: "Tools",
     icon: <Workflow className="size-4" />,
-    items: [{ title: "Workflow Validator", href: "/tools/validator" }],
+    items: [
+      { title: "Workflow Validator", href: "/tools/validator" },
+      { title: "Workflow Preview", href: "/tools/preview" },
+    ],
   },
 ]
 
