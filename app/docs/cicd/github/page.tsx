@@ -79,9 +79,11 @@ jobs:
       </div>
 
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold">AI PR Review</h2>
+        <h2 className="text-2xl font-semibold">
+          AI PR Review with Inline Comments
+        </h2>
         <p className="text-muted-foreground">
-          Automatically review pull requests with AI:
+          Automatically review pull requests with AI and post inline comments:
         </p>
         <CodeBlock>{`.github/workflows/ai-review.yml
 
@@ -91,26 +93,87 @@ on:
   pull_request:
     types: [opened, synchronize, reopened]
 
+permissions:
+  contents: read
+  pull-requests: write
+
 jobs:
   ai-review:
     runs-on: ubuntu-latest
+    container:
+      image: ghcr.io/rajitk13/shiro-automation:latest
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      - name: Install Shiro
-        run: |
-          curl -LO https://github.com/rajitk13/shiro-automation/releases/latest/download/shiro-linux-amd64
-          chmod +x shiro-linux-amd64
-          sudo mv shiro-linux-amd64 /usr/local/bin/shiro
-
       - name: Run AI Review
         env:
           GITHUB_TOKEN: ${"{{ secrets.GITHUB_TOKEN }}"}
-          OPENAI_API_KEY: ${"{{ secrets.OPENAI_API_KEY }}"}
-          SLACK_WEBHOOK_URL: ${"{{ secrets.SLACK_WEBHOOK_URL }}"}
-        run: shiro run -workflow .shiro/workflows/code-review.json`}</CodeBlock>
+          GEMINI_API_KEY: ${"{{ secrets.GEMINI_API_KEY }}"}
+          GITHUB_REPOSITORY: ${"{{ github.repository }}"}
+          GITHUB_REPOSITORY_OWNER: ${"{{ github.repository_owner }}"}
+          GITHUB_PR_NUMBER: ${"{{ github.event.pull_request.number }}"}
+          GITHUB_SHA: ${"{{ github.sha }}"}
+        run: shiro run`}</CodeBlock>
+        <p className="text-muted-foreground mt-4">
+          The workflow uses the built-in{" "}
+          <code className="text-accent">github</code> module which includes:
+        </p>
+        <ul className="list-disc list-inside text-muted-foreground space-y-1 mt-2">
+          <li>
+            <code className="text-accent">get_diff</code> - Fetch PR diff via
+            GitHub API
+          </li>
+          <li>
+            <code className="text-accent">post_comment</code> - Post general PR
+            comments
+          </li>
+          <li>
+            <code className="text-accent">post_inline_comments</code> - Post
+            line-by-line review comments
+          </li>
+        </ul>
+      </div>
+
+      <div className="space-y-4">
+        <h2 className="text-2xl font-semibold">Example Workflow</h2>
+        <p className="text-muted-foreground">
+          Example <code className="text-accent">.shiro/workflow.json</code> for
+          AI code review:
+        </p>
+        <CodeBlock language="json">{`{
+  "name": "github-code-review",
+  "description": "AI-powered GitHub PR code review",
+  "steps": [
+    {
+      "id": "get-diff",
+      "type": "github",
+      "config": {
+        "operation": "get_diff"
+      }
+    },
+    {
+      "id": "ai-review",
+      "type": "ai.generate",
+      "depends_on": ["get-diff"],
+      "config": {
+        "prompt": "Review this code diff:\\n\\n{{steps.get-diff.diff}}\\n\\nProvide free text comments with file path and line number for each issue found in format: 'path/to/file.go:42 - issue description'"
+      }
+    },
+    {
+      "id": "post-inline-comments",
+      "type": "github",
+      "depends_on": ["ai-review"],
+      "config": {
+        "operation": "post_inline_comments",
+        "body": "{{steps.ai-review.content}}",
+        "output_format": "text",
+        "dedup": true
+      }
+    }
+  ]
+}`}</CodeBlock>
       </div>
 
       <div className="space-y-4">
