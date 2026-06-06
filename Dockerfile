@@ -1,12 +1,13 @@
+# Stage 1: Get shiro binary from official image
+FROM ghcr.io/rajitk13/shiro-automation:latest AS shiro
+
+# Stage 2: Build the docs app
 FROM node:22-alpine
 
 WORKDIR /app
 
-# Install shiro binary for workflow validation
-RUN apk add --no-cache curl && \
-    curl -fsSL -o /usr/local/bin/shiro \
-      https://github.com/rajitk13/shiro-automation/releases/latest/download/shiro-linux-amd64 && \
-    chmod +x /usr/local/bin/shiro
+# Copy shiro binary from stage 1
+COPY --from=shiro /usr/local/bin/shiro /usr/local/bin/shiro
 
 COPY package.json package-lock.json* ./
 RUN npm ci
