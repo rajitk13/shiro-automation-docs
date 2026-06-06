@@ -43,10 +43,9 @@ export default function GitHubActionsPage() {
       </div>
 
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold">Basic Setup</h2>
+        <h2 className="text-2xl font-semibold">Official GitHub Action</h2>
         <p className="text-muted-foreground">
-          Create a workflow file in{" "}
-          <code className="text-accent">.github/workflows/</code>:
+          Use the official Shiro GitHub Action — no manual install needed:
         </p>
         <CodeBlock>{`.github/workflows/shiro.yml
 
@@ -66,22 +65,58 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Install Shiro
-        run: |
-          curl -LO https://github.com/rajitk13/shiro-automation/releases/latest/download/shiro-linux-amd64
-          chmod +x shiro-linux-amd64
-          sudo mv shiro-linux-amd64 /usr/local/bin/shiro
-
-      - name: Run Workflow
+      - name: Run Shiro Workflow
+        uses: rajitk13/shiro-automation@master
         env:
-          GITHUB_TOKEN: ${"{{ secrets.GITHUB_TOKEN }}"}
-        run: shiro run`}</CodeBlock>
+          GITHUB_TOKEN: ${"{{ secrets.GITHUB_TOKEN }}"}`}</CodeBlock>
+
+        <div className="rounded-lg border border-border bg-card p-4">
+          <h3 className="text-base font-semibold mb-3">Action Inputs</h3>
+          <table className="w-full text-sm">
+            <thead>
+              <tr className="border-b border-border">
+                <th className="py-2 text-left font-semibold">Input</th>
+                <th className="py-2 text-left font-semibold">Default</th>
+                <th className="py-2 text-left font-semibold">Description</th>
+              </tr>
+            </thead>
+            <tbody className="text-muted-foreground">
+              {[
+                [
+                  "workflow",
+                  ".shiro/workflow.json",
+                  "Path to workflow JSON file",
+                ],
+                ["config", ".shiro/config.yaml", "Path to config YAML file"],
+                ["shiro-dir", ".shiro", "Path to .shiro directory"],
+                [
+                  "state-store",
+                  "memory",
+                  "State storage backend (memory, filesystem)",
+                ],
+                ["fresh", "false", "Start fresh, ignore existing state"],
+                [
+                  "dry-run",
+                  "false",
+                  "Dry-run mode, validate without executing",
+                ],
+              ].map(([input, def, desc]) => (
+                <tr key={input} className="border-b border-border/50">
+                  <td className="py-2 font-mono text-accent">{input}</td>
+                  <td className="py-2 font-mono text-xs">{def}</td>
+                  <td className="py-2">{desc}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
 
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold">AI PR Review</h2>
         <p className="text-muted-foreground">
-          Automatically review pull requests with AI:
+          Automatically review pull requests with AI using{" "}
+          <code className="text-accent">get_diff</code> and the GitHub Action:
         </p>
         <CodeBlock>{`.github/workflows/ai-review.yml
 
@@ -99,18 +134,35 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Install Shiro
-        run: |
-          curl -LO https://github.com/rajitk13/shiro-automation/releases/latest/download/shiro-linux-amd64
-          chmod +x shiro-linux-amd64
-          sudo mv shiro-linux-amd64 /usr/local/bin/shiro
-
       - name: Run AI Review
+        uses: rajitk13/shiro-automation@master
+        with:
+          workflow: .shiro/workflows/code-review.json
         env:
           GITHUB_TOKEN: ${"{{ secrets.GITHUB_TOKEN }}"}
-          OPENAI_API_KEY: ${"{{ secrets.OPENAI_API_KEY }}"}
-          SLACK_WEBHOOK_URL: ${"{{ secrets.SLACK_WEBHOOK_URL }}"}
-        run: shiro run -workflow .shiro/workflows/code-review.json`}</CodeBlock>
+          OPENAI_API_KEY: ${"{{ secrets.OPENAI_API_KEY }}"}`}</CodeBlock>
+      </div>
+
+      <div className="space-y-4">
+        <h2 className="text-2xl font-semibold">Manual Install (Advanced)</h2>
+        <p className="text-muted-foreground">
+          If you need more control, install Shiro manually with architecture
+          detection:
+        </p>
+        <CodeBlock>{`- name: Install Shiro
+  run: |
+    ARCH=$(uname -m)
+    [ "$ARCH" = "x86_64" ] && ARCH="amd64"
+    [ "$ARCH" = "aarch64" ] && ARCH="arm64"
+    OS=$(uname -s | tr '[:upper:]' '[:lower:]')
+    curl -LO "https://github.com/rajitk13/shiro-automation/releases/latest/download/shiro-\${OS}-\${ARCH}"
+    chmod +x "shiro-\${OS}-\${ARCH}"
+    sudo mv "shiro-\${OS}-\${ARCH}" /usr/local/bin/shiro
+
+- name: Run Workflow
+  env:
+    GITHUB_TOKEN: ${"{{ secrets.GITHUB_TOKEN }}"}
+  run: shiro run`}</CodeBlock>
       </div>
 
       <div className="space-y-4">
@@ -118,8 +170,12 @@ jobs:
         <p className="text-muted-foreground">
           Use filesystem state store with artifacts:
         </p>
-        <CodeBlock>{`- name: Run Workflow
-  run: shiro run -state-store filesystem
+        <CodeBlock>{`- name: Run Shiro Workflow
+  uses: rajitk13/shiro-automation@master
+  with:
+    state-store: filesystem
+  env:
+    GITHUB_TOKEN: ${"{{ secrets.GITHUB_TOKEN }}"}
 
 - name: Upload State
   uses: actions/upload-artifact@v4

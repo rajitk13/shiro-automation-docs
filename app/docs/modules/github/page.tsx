@@ -51,6 +51,12 @@ export default function GitHubModulePage() {
           </thead>
           <tbody className="text-muted-foreground">
             <tr className="border-b border-border/50">
+              <td className="py-3 font-mono text-accent">get_diff</td>
+              <td className="py-3">
+                Get the diff for a pull request via GitHub API
+              </td>
+            </tr>
+            <tr className="border-b border-border/50">
               <td className="py-3 font-mono text-accent">post_comment</td>
               <td className="py-3">Post a general comment on a pull request</td>
             </tr>
@@ -83,7 +89,8 @@ export default function GitHubModulePage() {
               <td className="py-3">string</td>
               <td className="py-3">Yes</td>
               <td className="py-3">
-                Operation to perform: post_comment or post_inline_comments
+                Operation to perform: get_diff, post_comment, or
+                post_inline_comments
               </td>
             </tr>
             <tr className="border-b border-border/50">
@@ -150,6 +157,11 @@ export default function GitHubModulePage() {
               <td className="py-3">Whether the operation succeeded</td>
             </tr>
             <tr className="border-b border-border/50">
+              <td className="py-3 font-mono text-accent">diff</td>
+              <td className="py-3">string</td>
+              <td className="py-3">PR diff content (for get_diff)</td>
+            </tr>
+            <tr className="border-b border-border/50">
               <td className="py-3 font-mono text-accent">message</td>
               <td className="py-3">string</td>
               <td className="py-3">Status message</td>
@@ -182,6 +194,22 @@ export default function GitHubModulePage() {
 
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold">Examples</h2>
+
+        <div className="space-y-2">
+          <h3 className="text-lg font-medium">Get PR Diff</h3>
+          <CodeBlock>{`{
+  "id": "get-diff",
+  "type": "github",
+  "config": {
+    "operation": "get_diff"
+  }
+}`}</CodeBlock>
+          <p className="text-sm text-muted-foreground">
+            Output is available as{" "}
+            <code className="text-xs">{"{{steps.get-diff.diff}}"}</code> for use
+            in subsequent AI steps.
+          </p>
+        </div>
 
         <div className="space-y-2">
           <h3 className="text-lg font-medium">Post General PR Comment</h3>
