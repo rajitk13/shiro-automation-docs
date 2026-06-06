@@ -65,10 +65,6 @@ export default function ModulesPage() {
                 • <code className="text-accent">git.diff</code> - Git operations
               </li>
               <li>
-                • <code className="text-accent">github</code> - GitHub API
-                operations (PR diffs, comments, inline reviews)
-              </li>
-              <li>
                 • <code className="text-accent">gitlab</code> - GitLab API
                 operations
               </li>
