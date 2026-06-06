@@ -37,10 +37,16 @@ export default function AICodeReviewPage() {
           AI Code Review
         </h1>
         <p className="text-xl text-muted-foreground">
-          Chain <code>github</code> (or <code>git.diff</code>) and{" "}
-          <code>ai.generate</code> to produce automated code reviews on every
-          pull request — and post inline comments, PR summaries, Slack
-          notifications, or Jira tickets.
+          Chain the{" "}
+          <a
+            href="/docs/modules/github"
+            className="text-primary hover:underline"
+          >
+            <code>github</code>
+          </a>{" "}
+          module (or <code>git.diff</code>) and <code>ai.generate</code> to
+          produce automated code reviews on every pull request — and post inline
+          comments, PR summaries, Slack notifications, or Jira tickets.
         </p>
       </div>
 
@@ -52,7 +58,17 @@ export default function AICodeReviewPage() {
             {
               step: "1",
               title: "Fetch the diff",
-              desc: "github.get_diff fetches the PR diff via the GitHub API.",
+              desc: (
+                <>
+                  <a
+                    href="/docs/modules/github"
+                    className="text-primary hover:underline"
+                  >
+                    github.get_diff
+                  </a>{" "}
+                  fetches the PR diff via the GitHub API.
+                </>
+              ),
             },
             {
               step: "2",
@@ -62,12 +78,32 @@ export default function AICodeReviewPage() {
             {
               step: "3",
               title: "Post inline comments",
-              desc: "github.post_inline_comments posts line-by-line feedback on the PR.",
+              desc: (
+                <>
+                  <a
+                    href="/docs/modules/github"
+                    className="text-primary hover:underline"
+                  >
+                    github.post_inline_comments
+                  </a>{" "}
+                  posts line-by-line feedback on the PR.
+                </>
+              ),
             },
             {
               step: "4",
               title: "Summarize",
-              desc: "github.post_comment posts an overall review summary to the PR.",
+              desc: (
+                <>
+                  <a
+                    href="/docs/modules/github"
+                    className="text-primary hover:underline"
+                  >
+                    github.post_comment
+                  </a>{" "}
+                  posts an overall review summary to the PR.
+                </>
+              ),
             },
           ].map(({ step, title, desc }) => (
             <div
