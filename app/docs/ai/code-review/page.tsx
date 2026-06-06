@@ -209,6 +209,42 @@ export default function AICodeReviewPage() {
         </p>
       </div>
 
+      {/* GitHub Actions integration */}
+      <div className="space-y-4">
+        <h2 className="text-2xl font-semibold">Running in GitHub Actions</h2>
+        <CodeBlock language="yaml">{`name: Code Review
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  code-review:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Run Shiro Code Review
+        uses: rajitk13/shiro-automation@latest
+        with:
+          workflow: .shiro/workflows/github-code-review.json
+          config: .shiro/config.yaml
+        env:
+          GITHUB_TOKEN: $\{\{ secrets.GITHUB_TOKEN \}\}
+          OPENAI_API_KEY: $\{\{ secrets.OPENAI_API_KEY \}\}`}</CodeBlock>
+        <p className="text-sm text-muted-foreground">
+          Add <code className="text-xs text-primary">OPENAI_API_KEY</code> as a
+          repository secret in GitHub (
+          <strong>Settings → Secrets and variables → Actions</strong>).
+        </p>
+      </div>
+
       {/* Prompting tips */}
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold">Prompting Tips</h2>
