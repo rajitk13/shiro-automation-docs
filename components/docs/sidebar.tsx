@@ -82,6 +82,7 @@ export const navItems: NavItem[] = [
       { title: "shell", href: "/docs/modules/shell" },
       { title: "slack.notify", href: "/docs/modules/slack" },
       { title: "git.diff", href: "/docs/modules/git" },
+      { title: "github", href: "/docs/modules/github" },
       { title: "gitlab", href: "/docs/modules/gitlab" },
       { title: "ai.generate", href: "/docs/modules/ai" },
       { title: "jira-datacenter", href: "/docs/modules/jira-datacenter" },
