@@ -184,6 +184,140 @@ jobs:
     path: .shiro/state/`}</CodeBlock>
       </div>
 
+      {/* GitHub module reference */}
+      <div className="space-y-4">
+        <h2 className="text-2xl font-semibold">GitHub Module Reference</h2>
+        <p className="text-muted-foreground">
+          The built-in <code className="text-accent">github</code> module
+          supports three operations, all resolved from environment variables
+          automatically.
+        </p>
+
+        <div className="overflow-x-auto">
+          <table className="w-full text-sm">
+            <thead>
+              <tr className="border-b border-border">
+                <th className="py-2 text-left font-semibold pr-4 w-48">
+                  Operation
+                </th>
+                <th className="py-2 text-left font-semibold pr-4">
+                  Required config fields
+                </th>
+                <th className="py-2 text-left font-semibold">Output</th>
+              </tr>
+            </thead>
+            <tbody className="text-muted-foreground text-xs">
+              {[
+                ["get_diff", "none", "diff (string)"],
+                ["post_comment", "body (string)", "success, message"],
+                [
+                  "post_inline_comments",
+                  "body or comments, output_format, dedup",
+                  "success, posted_count, skipped_count",
+                ],
+              ].map(([op, config, output]) => (
+                <tr key={op} className="border-b border-border/50">
+                  <td className="py-3 pr-4">
+                    <code className="text-primary">{op}</code>
+                  </td>
+                  <td className="py-3 pr-4">{config}</td>
+                  <td className="py-3">{output}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+
+        <div className="rounded-lg border border-border bg-card p-5 space-y-2">
+          <p className="font-semibold text-sm">
+            Required environment variables (all operations)
+          </p>
+          <div className="overflow-x-auto">
+            <table className="w-full text-xs text-muted-foreground">
+              <tbody>
+                {[
+                  [
+                    "GITHUB_TOKEN",
+                    "GitHub token with repo and pull-requests write scope",
+                  ],
+                  ["GITHUB_REPOSITORY_OWNER", "Repository owner"],
+                  ["GITHUB_REPOSITORY", "Full repository name (owner/repo)"],
+                  ["GITHUB_PR_NUMBER", "Pull request number (post operations)"],
+                  [
+                    "GITHUB_SHA",
+                    "Commit SHA — required for post_inline_comments",
+                  ],
+                ].map(([k, v]) => (
+                  <tr key={k} className="border-b border-border/50">
+                    <td className="py-2 pr-4 font-mono text-primary whitespace-nowrap">
+                      {k}
+                    </td>
+                    <td className="py-2">{v}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      {/* post_inline_comments config */}
+      <div className="space-y-4">
+        <h2 className="text-2xl font-semibold">post_inline_comments Config</h2>
+        <div className="overflow-x-auto">
+          <table className="w-full text-sm">
+            <thead>
+              <tr className="border-b border-border">
+                <th className="py-2 text-left font-semibold pr-4 w-40">
+                  Field
+                </th>
+                <th className="py-2 text-left font-semibold pr-4 w-20">
+                  Required
+                </th>
+                <th className="py-2 text-left font-semibold">Description</th>
+              </tr>
+            </thead>
+            <tbody className="text-muted-foreground text-xs">
+              {[
+                [
+                  "output_format",
+                  "No",
+                  "text (default) or json. Controls how comments are parsed from the AI output.",
+                ],
+                [
+                  "body",
+                  "text mode",
+                  "Raw AI text output. Shiro parses file:line - comment patterns.",
+                ],
+                [
+                  "comments",
+                  "json mode",
+                  "JSON array of {file, line, comment} objects from {{steps.STEP_ID.json}}.",
+                ],
+                [
+                  "dedup",
+                  "No",
+                  "Boolean. Default true. Skips comments already posted on the PR.",
+                ],
+                [
+                  "commit_id",
+                  "No",
+                  "Override commit SHA. Defaults to GITHUB_SHA env var.",
+                ],
+              ].map(([field, req, desc]) => (
+                <tr key={field} className="border-b border-border/50">
+                  <td className="py-3 pr-4">
+                    <code className="text-primary">{field}</code>
+                  </td>
+                  <td className="py-3 pr-4">{req}</td>
+                  <td className="py-3">{desc}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
       <div className="rounded-lg border border-border bg-card p-6">
         <h2 className="text-xl font-semibold mb-2">GitHub vs GitLab State</h2>
         <p className="text-muted-foreground">
