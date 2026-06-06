@@ -65,7 +65,7 @@ export default function ToolsLayout({
               <span className="text-sm font-medium">Shiro Automation</span>
             </div>
             <p className="text-sm text-muted-foreground">
-              © 2024 Shiro Automation. Open source on{" "}
+              © 2026 Shiro Automation. Open source on{" "}
               <Link
                 href="https://github.com/rajitk13/shiro-automation"
                 className="text-primary hover:underline"
