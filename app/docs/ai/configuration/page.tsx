@@ -153,12 +153,12 @@ export default function AIConfigurationPage() {
                 ],
               ].map(([field, type_, req, desc]) => (
                 <tr key={field} className="border-b border-border/50">
-                  <td className="py-3 pr-4">
+                  <td className="py-3 px-4">
                     <code className="text-xs text-primary">{field}</code>
                   </td>
-                  <td className="py-3 pr-4 text-xs">{type_}</td>
-                  <td className="py-3 pr-4 text-xs">{req}</td>
-                  <td className="py-3">{desc}</td>
+                  <td className="py-3 px-4 text-xs">{type_}</td>
+                  <td className="py-3 px-4 text-xs">{req}</td>
+                  <td className="py-3 px-4">{desc}</td>
                 </tr>
               ))}
             </tbody>

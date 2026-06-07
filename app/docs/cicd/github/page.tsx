@@ -102,9 +102,9 @@ jobs:
                 ],
               ].map(([input, def, desc]) => (
                 <tr key={input} className="border-b border-border/50">
-                  <td className="py-2 font-mono text-accent">{input}</td>
-                  <td className="py-2 font-mono text-xs">{def}</td>
-                  <td className="py-2">{desc}</td>
+                  <td className="py-2 px-4 font-mono text-accent">{input}</td>
+                  <td className="py-2 px-4 font-mono text-xs">{def}</td>
+                  <td className="py-2 px-4">{desc}</td>
                 </tr>
               ))}
             </tbody>
@@ -217,11 +217,11 @@ jobs:
                 ],
               ].map(([op, config, output]) => (
                 <tr key={op} className="border-b border-border/50">
-                  <td className="py-3 pr-4">
+                  <td className="py-3 px-4">
                     <code className="text-primary">{op}</code>
                   </td>
-                  <td className="py-3 pr-4">{config}</td>
-                  <td className="py-3">{output}</td>
+                  <td className="py-3 px-4">{config}</td>
+                  <td className="py-3 px-4">{output}</td>
                 </tr>
               ))}
             </tbody>
@@ -249,10 +249,10 @@ jobs:
                   ],
                 ].map(([k, v]) => (
                   <tr key={k} className="border-b border-border/50">
-                    <td className="py-2 pr-4 font-mono text-primary whitespace-nowrap">
+                    <td className="py-2 px-4 font-mono text-primary whitespace-nowrap">
                       {k}
                     </td>
-                    <td className="py-2">{v}</td>
+                    <td className="py-2 px-4">{v}</td>
                   </tr>
                 ))}
               </tbody>
@@ -306,11 +306,11 @@ jobs:
                 ],
               ].map(([field, req, desc]) => (
                 <tr key={field} className="border-b border-border/50">
-                  <td className="py-3 pr-4">
+                  <td className="py-3 px-4">
                     <code className="text-primary">{field}</code>
                   </td>
-                  <td className="py-3 pr-4">{req}</td>
-                  <td className="py-3">{desc}</td>
+                  <td className="py-3 px-4">{req}</td>
+                  <td className="py-3 px-4">{desc}</td>
                 </tr>
               ))}
             </tbody>

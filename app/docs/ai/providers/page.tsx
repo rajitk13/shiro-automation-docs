@@ -201,10 +201,10 @@ export default function AIProvidersPage() {
                 ["headers", "Map of extra HTTP headers to include in requests"],
               ].map(([f, d]) => (
                 <tr key={f} className="border-b border-border/50">
-                  <td className="py-3 pr-4">
+                  <td className="py-3 px-4">
                     <code className="text-xs text-primary">{f}</code>
                   </td>
-                  <td className="py-3">{d}</td>
+                  <td className="py-3 px-4">{d}</td>
                 </tr>
               ))}
             </tbody>
@@ -288,10 +288,10 @@ ollama pull llama3:8b`}</CodeBlock>
                 ],
               ].map(([f, d]) => (
                 <tr key={f} className="border-b border-border/50">
-                  <td className="py-3 pr-4">
+                  <td className="py-3 px-4">
                     <code className="text-xs text-primary">{f}</code>
                   </td>
-                  <td className="py-3">{d}</td>
+                  <td className="py-3 px-4">{d}</td>
                 </tr>
               ))}
             </tbody>

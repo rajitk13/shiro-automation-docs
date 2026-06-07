@@ -186,10 +186,10 @@ export default function AICodeReviewPage() {
                   ["GITHUB_SHA", "Commit SHA to attach inline comments to"],
                 ].map(([k, v]) => (
                   <tr key={k} className="border-b border-border/50">
-                    <td className="py-2 pr-4 font-mono text-primary whitespace-nowrap">
+                    <td className="py-2 px-4 font-mono text-primary whitespace-nowrap">
                       {k}
                     </td>
-                    <td className="py-2">{v}</td>
+                    <td className="py-2 px-4">{v}</td>
                   </tr>
                 ))}
               </tbody>
@@ -282,66 +282,66 @@ export default function AICodeReviewPage() {
             </thead>
             <tbody className="text-muted-foreground">
               <tr className="border-b border-border/50">
-                <td className="py-3 pr-4">
+                <td className="py-3 px-4">
                   <code className="text-xs text-primary">prompt</code>
                 </td>
-                <td className="py-3 pr-4 text-xs">string</td>
-                <td className="py-3 pr-4 text-xs">Yes</td>
-                <td className="py-3 text-xs">
+                <td className="py-3 px-4 text-xs">string</td>
+                <td className="py-3 px-4 text-xs">Yes</td>
+                <td className="py-3 px-4 text-xs">
                   The user prompt sent to the model. Supports variable
                   interpolation.
                 </td>
               </tr>
               <tr className="border-b border-border/50">
-                <td className="py-3 pr-4">
+                <td className="py-3 px-4">
                   <code className="text-xs text-primary">model</code>
                 </td>
-                <td className="py-3 pr-4 text-xs">string</td>
-                <td className="py-3 pr-4 text-xs">No</td>
-                <td className="py-3 text-xs">
+                <td className="py-3 px-4 text-xs">string</td>
+                <td className="py-3 px-4 text-xs">No</td>
+                <td className="py-3 px-4 text-xs">
                   Model name. Must match a key in .shiro/config.yaml. Defaults
                   to the only configured model.
                 </td>
               </tr>
               <tr className="border-b border-border/50">
-                <td className="py-3 pr-4">
+                <td className="py-3 px-4">
                   <code className="text-xs text-primary">provider</code>
                 </td>
-                <td className="py-3 pr-4 text-xs">string</td>
-                <td className="py-3 pr-4 text-xs">No</td>
-                <td className="py-3 text-xs">
+                <td className="py-3 px-4 text-xs">string</td>
+                <td className="py-3 px-4 text-xs">No</td>
+                <td className="py-3 px-4 text-xs">
                   Provider key from config.yaml. Auto-resolved if only one is
                   configured.
                 </td>
               </tr>
               <tr className="border-b border-border/50">
-                <td className="py-3 pr-4">
+                <td className="py-3 px-4">
                   <code className="text-xs text-primary">system</code>
                 </td>
-                <td className="py-3 pr-4 text-xs">string</td>
-                <td className="py-3 pr-4 text-xs">No</td>
-                <td className="py-3 text-xs">
+                <td className="py-3 px-4 text-xs">string</td>
+                <td className="py-3 px-4 text-xs">No</td>
+                <td className="py-3 px-4 text-xs">
                   System prompt to set the model&apos;s persona or behavior.
                 </td>
               </tr>
               <tr className="border-b border-border/50">
-                <td className="py-3 pr-4">
+                <td className="py-3 px-4">
                   <code className="text-xs text-primary">temperature</code>
                 </td>
-                <td className="py-3 pr-4 text-xs">float</td>
-                <td className="py-3 pr-4 text-xs">No</td>
-                <td className="py-3 text-xs">
+                <td className="py-3 px-4 text-xs">float</td>
+                <td className="py-3 px-4 text-xs">No</td>
+                <td className="py-3 px-4 text-xs">
                   Sampling temperature (0.0–1.0). Lower = more deterministic.
                   Default: model default.
                 </td>
               </tr>
               <tr className="border-b border-border/50">
-                <td className="py-3 pr-4">
+                <td className="py-3 px-4">
                   <code className="text-xs text-primary">max_tokens</code>
                 </td>
-                <td className="py-3 pr-4 text-xs">integer</td>
-                <td className="py-3 pr-4 text-xs">No</td>
-                <td className="py-3 text-xs">
+                <td className="py-3 px-4 text-xs">integer</td>
+                <td className="py-3 px-4 text-xs">No</td>
+                <td className="py-3 px-4 text-xs">
                   Maximum tokens in the response.
                 </td>
               </tr>
@@ -370,10 +370,10 @@ export default function AICodeReviewPage() {
                   ["{{steps.STEP_ID.usage.total_tokens}}", "Total tokens used"],
                 ].map(([k, v]) => (
                   <tr key={k} className="border-b border-border/50">
-                    <td className="py-2 pr-4 font-mono text-primary whitespace-nowrap">
+                    <td className="py-2 px-4 font-mono text-primary whitespace-nowrap">
                       {k}
                     </td>
-                    <td className="py-2">{v}</td>
+                    <td className="py-2 px-4">{v}</td>
                   </tr>
                 ))}
               </tbody>
