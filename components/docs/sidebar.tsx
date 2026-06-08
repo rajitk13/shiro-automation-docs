@@ -121,6 +121,7 @@ export const navItems: NavItem[] = [
     items: [
       { title: "Workflow Validator", href: "/tools/validator" },
       { title: "Workflow Preview", href: "/tools/preview" },
+      { title: "AI Generator", href: "/tools/generator" },
     ],
   },
 ]

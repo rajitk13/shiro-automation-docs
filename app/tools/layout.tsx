@@ -41,6 +41,12 @@ export default function ToolsLayout({
             >
               Preview
             </Link>
+            <Link
+              href="/tools/generator"
+              className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+            >
+              Generator
+            </Link>
             <Button size="sm" asChild>
               <Link href="/docs/quickstart">Get Started</Link>
             </Button>
