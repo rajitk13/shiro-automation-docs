@@ -1,6 +1,7 @@
 import { Metadata } from "next"
 import Link from "next/link"
 import { getLatestRelease } from "@/lib/github"
+import { Mermaid } from "@/components/mermaid"
 import {
   ArrowRight,
   Zap,
@@ -249,19 +250,19 @@ shiro:
         <h2 className="text-2xl font-semibold tracking-tight">
           Architecture Overview
         </h2>
-        <pre className="rounded-lg bg-[hsl(var(--code-bg))] border border-border p-4 overflow-x-auto">
-          <code className="text-sm text-slate-300 font-mono">
-            {`Trigger Adapters (GitLab/Jenkins/GitHub)
-              ↓
-      Workflow Runtime (Go)
-              ↓
-         DAG Executor
-              ↓
-      Module/Plugin System
-              ↓
-    AI / Integrations / Compute`}
-          </code>
-        </pre>
+        <Mermaid
+          chart={`graph TD
+    A[Trigger Adapters<br/>GitLab/Jenkins/GitHub] --> B[Workflow Runtime<br/>Go]
+    B --> C[DAG Executor]
+    C --> D[Module/Plugin System]
+    D --> E[AI / Integrations / Compute]
+    
+    style A fill:#e0f2fe,stroke:#0284c7
+    style B fill:#dbeafe,stroke:#0369a1
+    style C fill:#dbeafe,stroke:#0369a1
+    style D fill:#dbeafe,stroke:#0369a1
+    style E fill:#dbeafe,stroke:#0369a1`}
+        />
       </div>
     </div>
   )
