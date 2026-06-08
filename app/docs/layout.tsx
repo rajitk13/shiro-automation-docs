@@ -13,10 +13,10 @@ export default function DocsLayout({
       <div className="flex flex-1">
         <DocsSidebar />
         <main className="flex-1 min-w-0 lg:pl-[17rem]">
-          <div className="docs-content mx-auto max-w-3xl px-4 py-6 sm:px-6 sm:py-8 lg:px-10 lg:py-10">
+          <div className="docs-content mx-auto max-w-5xl px-4 py-6 sm:px-6 sm:py-8 lg:px-10 lg:py-10">
             {children}
           </div>
-          <footer className="mx-auto max-w-3xl border-t border-border px-4 py-5 sm:px-6 lg:px-10">
+          <footer className="mx-auto max-w-5xl border-t border-border px-4 py-5 sm:px-6 lg:px-10">
             <div className="flex flex-col items-center gap-3 text-xs text-muted-foreground sm:flex-row sm:justify-between">
               <span>© {new Date().getFullYear()} Shiro Automation</span>
               <div className="flex items-center gap-4">

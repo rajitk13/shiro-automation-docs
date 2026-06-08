@@ -45,42 +45,48 @@ export default function GitLabModulePage() {
         <table className="w-full text-sm">
           <thead>
             <tr className="border-b border-border">
-              <th className="py-2 text-left font-semibold">Operation</th>
-              <th className="py-2 text-left font-semibold">Description</th>
+              <th className="py-3 px-4 text-left font-semibold w-64">
+                Operation
+              </th>
+              <th className="py-3 px-4 text-left font-semibold">Description</th>
             </tr>
           </thead>
           <tbody className="text-muted-foreground">
             <tr className="border-b border-border/50">
-              <td className="py-3 font-mono text-accent">post_comment</td>
-              <td className="py-3">
+              <td className="py-4 px-4 font-mono text-accent">post_comment</td>
+              <td className="py-4 px-4">
                 Post a general comment on a merge request
               </td>
             </tr>
             <tr className="border-b border-border/50">
-              <td className="py-3 font-mono text-accent">
+              <td className="py-4 px-4 font-mono text-accent">
                 post_inline_comments
               </td>
-              <td className="py-3">
+              <td className="py-4 px-4">
                 Post inline line comments on a merge request
               </td>
             </tr>
             <tr className="border-b border-border/50">
-              <td className="py-3 font-mono text-accent">get_commit_info</td>
-              <td className="py-3">Get commit details</td>
+              <td className="py-4 px-4 font-mono text-accent">
+                get_commit_info
+              </td>
+              <td className="py-4 px-4">Get commit details</td>
             </tr>
             <tr className="border-b border-border/50">
-              <td className="py-3 font-mono text-accent">get_user_info</td>
-              <td className="py-3">Get user information</td>
+              <td className="py-4 px-4 font-mono text-accent">get_user_info</td>
+              <td className="py-4 px-4">Get user information</td>
             </tr>
             <tr className="border-b border-border/50">
-              <td className="py-3 font-mono text-accent">
+              <td className="py-4 px-4 font-mono text-accent">
                 get_mr_participants
               </td>
-              <td className="py-3">Get merge request participants</td>
+              <td className="py-4 px-4">Get merge request participants</td>
             </tr>
             <tr className="border-b border-border/50">
-              <td className="py-3 font-mono text-accent">get_files_changed</td>
-              <td className="py-3">Get list of changed files in MR</td>
+              <td className="py-4 px-4 font-mono text-accent">
+                get_files_changed
+              </td>
+              <td className="py-4 px-4">Get list of changed files in MR</td>
             </tr>
           </tbody>
         </table>
