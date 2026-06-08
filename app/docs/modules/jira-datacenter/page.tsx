@@ -158,10 +158,10 @@ shiro build`}</CodeBlock>
           <table className="w-full text-sm">
             <thead>
               <tr className="border-b border-border">
-                <th className="py-2 text-left font-semibold pr-4 w-40">
+                <th className="py-2 text-left font-semibold pr-4 w-52">
                   Field
                 </th>
-                <th className="py-2 text-left font-semibold pr-12 w-16">
+                <th className="py-2 text-left font-semibold pr-12 w-24">
                   Type
                 </th>
                 <th className="py-2 text-left font-semibold">Description</th>
@@ -229,10 +229,10 @@ shiro build`}</CodeBlock>
           <table className="w-full text-sm">
             <thead>
               <tr className="border-b border-border">
-                <th className="py-2 text-left font-semibold pr-4 w-40">
+                <th className="py-2 text-left font-semibold pr-4 w-52">
                   Field
                 </th>
-                <th className="py-2 text-left font-semibold pr-12 w-16">
+                <th className="py-2 text-left font-semibold pr-12 w-24">
                   Type
                 </th>
                 <th className="py-2 text-left font-semibold">Description</th>
@@ -265,10 +265,10 @@ shiro build`}</CodeBlock>
           <table className="w-full text-sm">
             <thead>
               <tr className="border-b border-border">
-                <th className="py-2 text-left font-semibold pr-4 w-40">
+                <th className="py-2 text-left font-semibold pr-4 w-52">
                   Field
                 </th>
-                <th className="py-2 text-left font-semibold pr-12 w-16">
+                <th className="py-2 text-left font-semibold pr-12 w-24">
                   Type
                 </th>
                 <th className="py-2 text-left font-semibold">Description</th>
@@ -318,10 +318,10 @@ shiro build`}</CodeBlock>
           <table className="w-full text-sm">
             <thead>
               <tr className="border-b border-border">
-                <th className="py-2 text-left font-semibold pr-4 w-40">
+                <th className="py-2 text-left font-semibold pr-4 w-52">
                   Field
                 </th>
-                <th className="py-2 text-left font-semibold pr-12 w-16">
+                <th className="py-2 text-left font-semibold pr-12 w-24">
                   Type
                 </th>
                 <th className="py-2 text-left font-semibold">Description</th>
@@ -362,10 +362,10 @@ shiro build`}</CodeBlock>
           <table className="w-full text-sm">
             <thead>
               <tr className="border-b border-border">
-                <th className="py-2 text-left font-semibold pr-4 w-40">
+                <th className="py-2 text-left font-semibold pr-4 w-52">
                   Field
                 </th>
-                <th className="py-2 text-left font-semibold pr-12 w-16">
+                <th className="py-2 text-left font-semibold pr-12 w-24">
                   Type
                 </th>
                 <th className="py-2 text-left font-semibold">Description</th>
@@ -396,10 +396,10 @@ shiro build`}</CodeBlock>
           <table className="w-full text-sm">
             <thead>
               <tr className="border-b border-border">
-                <th className="py-2 text-left font-semibold pr-4 w-40">
+                <th className="py-2 text-left font-semibold pr-4 w-52">
                   Field
                 </th>
-                <th className="py-2 text-left font-semibold pr-12 w-16">
+                <th className="py-2 text-left font-semibold pr-12 w-24">
                   Type
                 </th>
                 <th className="py-2 text-left font-semibold">Description</th>

@@ -176,7 +176,7 @@ export default function AIProvidersPage() {
           <table className="w-full text-sm">
             <thead>
               <tr className="border-b border-border">
-                <th className="py-2 text-left font-semibold pr-4 w-36">
+                <th className="py-2 text-left font-semibold pr-4 w-52">
                   Field
                 </th>
                 <th className="py-2 text-left font-semibold">Description</th>
@@ -261,7 +261,7 @@ ollama pull llama3:8b`}</CodeBlock>
           <table className="w-full text-sm">
             <thead>
               <tr className="border-b border-border">
-                <th className="py-2 text-left font-semibold pr-4 w-36">
+                <th className="py-2 text-left font-semibold pr-4 w-52">
                   Field
                 </th>
                 <th className="py-2 text-left font-semibold">Description</th>
