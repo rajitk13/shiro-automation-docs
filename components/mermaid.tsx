@@ -12,7 +12,7 @@ export function Mermaid({ chart }: MermaidProps) {
 
   useEffect(() => {
     mermaid.initialize({
-      startOnLoad: true,
+      startOnLoad: false,
       theme: "neutral",
       securityLevel: "loose",
     })
@@ -20,17 +20,18 @@ export function Mermaid({ chart }: MermaidProps) {
 
   useEffect(() => {
     if (ref.current) {
-      mermaid.run({
-        nodes: [ref.current],
-      })
+      mermaid
+        .render(`mermaid-${Date.now()}`, chart)
+        .then((result) => {
+          if (ref.current) {
+            ref.current.innerHTML = result.svg
+          }
+        })
+        .catch((err) => {
+          console.error("Mermaid render error:", err)
+        })
     }
   }, [chart])
 
-  return (
-    <div
-      ref={ref}
-      className="mermaid flex justify-center"
-      data-mermaid={chart}
-    />
-  )
+  return <div ref={ref} className="flex justify-center overflow-x-auto" />
 }

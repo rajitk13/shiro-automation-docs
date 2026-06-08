@@ -251,17 +251,17 @@ shiro:
           Architecture Overview
         </h2>
         <Mermaid
-          chart={`graph TD
-    A[Trigger Adapters<br/>GitLab/Jenkins/GitHub] --> B[Workflow Runtime<br/>Go]
-    B --> C[DAG Executor]
-    C --> D[Module/Plugin System]
-    D --> E[AI / Integrations / Compute]
+          chart={`graph LR
+    A[Trigger Adapters<br/>GitLab/Jenkins/GitHub<br/>_CI Integration_] --> B[Workflow Runtime<br/>Go<br/>_Core Engine_]
+    B --> C[DAG Executor<br/>_Task Scheduling_]
+    C --> D[Module/Plugin System<br/>_Extensible_]
+    D --> E[AI / Integrations / Compute<br/>_External Services_]
     
-    style A fill:#e0f2fe,stroke:#0284c7
-    style B fill:#dbeafe,stroke:#0369a1
-    style C fill:#dbeafe,stroke:#0369a1
-    style D fill:#dbeafe,stroke:#0369a1
-    style E fill:#dbeafe,stroke:#0369a1`}
+    style A fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e
+    style B fill:#dbeafe,stroke:#0369a1,stroke-width:2px,color:#0c4a6e
+    style C fill:#dbeafe,stroke:#0369a1,stroke-width:2px,color:#0c4a6e
+    style D fill:#dbeafe,stroke:#0369a1,stroke-width:2px,color:#0c4a6e
+    style E fill:#dbeafe,stroke:#0369a1,stroke-width:2px,color:#0c4a6e`}
         />
       </div>
     </div>
