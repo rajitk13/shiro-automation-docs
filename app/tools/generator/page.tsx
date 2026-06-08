@@ -19,7 +19,7 @@ import {
 } from "lucide-react"
 
 interface ApiResult {
-  workflow?: string
+  workflow?: unknown
   error?: string
   raw?: string
 }
@@ -50,6 +50,14 @@ export default function GeneratorPage() {
   const [modalTitle, setModalTitle] = useState("")
   const [modalContent, setModalContent] = useState<React.ReactNode>(null)
   const [modalLoading, setModalLoading] = useState(false)
+
+  const normalizeWorkflow = (workflow: unknown) => {
+    if (typeof workflow === "string") {
+      return workflow
+    }
+
+    return JSON.stringify(workflow, null, 2)
+  }
 
   const handleGenerate = async () => {
     if (!prompt.trim() || !apiKey.trim()) {
@@ -147,8 +155,12 @@ export default function GeneratorPage() {
         })
 
         const data: ApiResult = await res.json()
-        console.log("API response:", data)
-        setResult(data)
+        setResult({
+          ...data,
+          workflow: data.workflow
+            ? normalizeWorkflow(data.workflow)
+            : undefined,
+        })
       }
     } catch {
       setResult({ error: "Failed to reach generation API" })
@@ -159,7 +171,7 @@ export default function GeneratorPage() {
 
   const handleCopy = () => {
     if (result?.workflow) {
-      navigator.clipboard.writeText(result.workflow)
+      navigator.clipboard.writeText(normalizeWorkflow(result.workflow))
       setCopied(true)
       setTimeout(() => setCopied(false), 2000)
     }
@@ -167,7 +179,9 @@ export default function GeneratorPage() {
 
   const handleDownload = () => {
     if (result?.workflow) {
-      const blob = new Blob([result.workflow], { type: "application/json" })
+      const blob = new Blob([normalizeWorkflow(result.workflow)], {
+        type: "application/json",
+      })
       const url = URL.createObjectURL(blob)
       const a = document.createElement("a")
       a.href = url
@@ -179,7 +193,7 @@ export default function GeneratorPage() {
 
   const handleShare = () => {
     if (result?.workflow) {
-      const encoded = encodeURIComponent(result.workflow)
+      const encoded = encodeURIComponent(normalizeWorkflow(result.workflow))
       const url = `${window.location.origin}/tools/generator?workflow=${encoded}`
       navigator.clipboard.writeText(url)
       setCopied(true)
@@ -207,7 +221,7 @@ export default function GeneratorPage() {
       const res = await fetch("/api/validate", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ workflow: result.workflow }),
+        body: JSON.stringify({ workflow: normalizeWorkflow(result.workflow) }),
       })
       const data = await res.json()
 
@@ -296,7 +310,7 @@ export default function GeneratorPage() {
       const res = await fetch("/api/preview", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ workflow: result.workflow }),
+        body: JSON.stringify({ workflow: normalizeWorkflow(result.workflow) }),
       })
       const data = await res.json()
 
@@ -367,11 +381,13 @@ export default function GeneratorPage() {
     }
   }
 
-  const formatJson = (json: string) => {
+  const formatJson = (json: unknown) => {
+    const jsonString = normalizeWorkflow(json)
+
     try {
-      return JSON.stringify(JSON.parse(json), null, 2)
+      return JSON.stringify(JSON.parse(jsonString), null, 2)
     } catch {
-      return json
+      return jsonString
     }
   }
 
@@ -559,7 +575,7 @@ export default function GeneratorPage() {
               )}
 
               {/* JSON Output */}
-              {result.workflow && (
+              {Boolean(result.workflow) && (
                 <div className="space-y-2">
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-2">
