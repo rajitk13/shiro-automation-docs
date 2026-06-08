@@ -176,10 +176,12 @@ export default function AIProvidersPage() {
           <table className="w-full text-sm">
             <thead>
               <tr className="border-b border-border">
-                <th className="py-2 text-left font-semibold pr-4 w-52">
+                <th className="py-3 text-left font-semibold px-4 w-52">
                   Field
                 </th>
-                <th className="py-2 text-left font-semibold">Description</th>
+                <th className="py-3 text-left font-semibold px-4">
+                  Description
+                </th>
               </tr>
             </thead>
             <tbody className="text-muted-foreground">
@@ -201,10 +203,10 @@ export default function AIProvidersPage() {
                 ["headers", "Map of extra HTTP headers to include in requests"],
               ].map(([f, d]) => (
                 <tr key={f} className="border-b border-border/50">
-                  <td className="py-3 px-4">
+                  <td className="py-4 px-4">
                     <code className="text-xs text-primary">{f}</code>
                   </td>
-                  <td className="py-3 px-4">{d}</td>
+                  <td className="py-4 px-4">{d}</td>
                 </tr>
               ))}
             </tbody>
@@ -261,10 +263,12 @@ ollama pull llama3:8b`}</CodeBlock>
           <table className="w-full text-sm">
             <thead>
               <tr className="border-b border-border">
-                <th className="py-2 text-left font-semibold pr-4 w-52">
+                <th className="py-3 text-left font-semibold px-4 w-52">
                   Field
                 </th>
-                <th className="py-2 text-left font-semibold">Description</th>
+                <th className="py-3 text-left font-semibold px-4">
+                  Description
+                </th>
               </tr>
             </thead>
             <tbody className="text-muted-foreground">
@@ -288,10 +292,10 @@ ollama pull llama3:8b`}</CodeBlock>
                 ],
               ].map(([f, d]) => (
                 <tr key={f} className="border-b border-border/50">
-                  <td className="py-3 px-4">
+                  <td className="py-4 px-4">
                     <code className="text-xs text-primary">{f}</code>
                   </td>
-                  <td className="py-3 px-4">{d}</td>
+                  <td className="py-4 px-4">{d}</td>
                 </tr>
               ))}
             </tbody>

@@ -108,14 +108,16 @@ export default function AIConfigurationPage() {
           <table className="w-full text-sm">
             <thead>
               <tr className="border-b border-border">
-                <th className="py-2 text-left font-semibold pr-4 w-52">
+                <th className="py-3 text-left font-semibold px-4 w-52">
                   Field
                 </th>
-                <th className="py-2 text-left font-semibold pr-4 w-32">Type</th>
-                <th className="py-2 text-left font-semibold pr-4 w-28">
+                <th className="py-3 text-left font-semibold px-4 w-32">Type</th>
+                <th className="py-3 text-left font-semibold px-4 w-28">
                   Required
                 </th>
-                <th className="py-2 text-left font-semibold">Description</th>
+                <th className="py-3 text-left font-semibold px-4">
+                  Description
+                </th>
               </tr>
             </thead>
             <tbody className="text-muted-foreground">

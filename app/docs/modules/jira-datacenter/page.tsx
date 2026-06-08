@@ -43,7 +43,7 @@ function ParamRow({
 }) {
   return (
     <tr className="border-b border-border/50">
-      <td className="py-3 px-4">
+      <td className="py-4 px-4">
         <code className="text-xs text-primary">{name}</code>
         {required && (
           <span className="ml-1.5 text-[10px] text-red-400 font-medium">
@@ -51,8 +51,8 @@ function ParamRow({
           </span>
         )}
       </td>
-      <td className="py-3 px-4 text-xs text-muted-foreground">{type}</td>
-      <td className="py-3 px-4 text-sm text-muted-foreground">{description}</td>
+      <td className="py-4 px-4 text-xs text-muted-foreground">{type}</td>
+      <td className="py-4 px-4 text-sm text-muted-foreground">{description}</td>
     </tr>
   )
 }

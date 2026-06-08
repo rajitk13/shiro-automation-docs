@@ -102,9 +102,9 @@ jobs:
                 ],
               ].map(([input, def, desc]) => (
                 <tr key={input} className="border-b border-border/50">
-                  <td className="py-2 px-4 font-mono text-accent">{input}</td>
-                  <td className="py-2 px-4 font-mono text-xs">{def}</td>
-                  <td className="py-2 px-4">{desc}</td>
+                  <td className="py-3 px-4 font-mono text-accent">{input}</td>
+                  <td className="py-3 px-4 font-mono text-xs">{def}</td>
+                  <td className="py-3 px-4">{desc}</td>
                 </tr>
               ))}
             </tbody>
@@ -197,13 +197,13 @@ jobs:
           <table className="w-full text-sm">
             <thead>
               <tr className="border-b border-border">
-                <th className="py-2 text-left font-semibold pr-4 w-64">
+                <th className="py-3 text-left font-semibold px-4 w-64">
                   Operation
                 </th>
-                <th className="py-2 text-left font-semibold pr-4">
+                <th className="py-3 text-left font-semibold px-4">
                   Required config fields
                 </th>
-                <th className="py-2 text-left font-semibold">Output</th>
+                <th className="py-3 text-left font-semibold px-4">Output</th>
               </tr>
             </thead>
             <tbody className="text-muted-foreground text-xs">
@@ -217,11 +217,11 @@ jobs:
                 ],
               ].map(([op, config, output]) => (
                 <tr key={op} className="border-b border-border/50">
-                  <td className="py-3 px-4">
+                  <td className="py-4 px-4">
                     <code className="text-primary">{op}</code>
                   </td>
-                  <td className="py-3 px-4">{config}</td>
-                  <td className="py-3 px-4">{output}</td>
+                  <td className="py-4 px-4">{config}</td>
+                  <td className="py-4 px-4">{output}</td>
                 </tr>
               ))}
             </tbody>
@@ -249,10 +249,10 @@ jobs:
                   ],
                 ].map(([k, v]) => (
                   <tr key={k} className="border-b border-border/50">
-                    <td className="py-2 px-4 font-mono text-primary whitespace-nowrap">
+                    <td className="py-3 px-4 font-mono text-primary whitespace-nowrap">
                       {k}
                     </td>
-                    <td className="py-2 px-4">{v}</td>
+                    <td className="py-3 px-4">{v}</td>
                   </tr>
                 ))}
               </tbody>
@@ -268,13 +268,15 @@ jobs:
           <table className="w-full text-sm">
             <thead>
               <tr className="border-b border-border">
-                <th className="py-2 text-left font-semibold pr-4 w-52">
+                <th className="py-3 text-left font-semibold px-4 w-52">
                   Field
                 </th>
-                <th className="py-2 text-left font-semibold pr-4 w-28">
+                <th className="py-3 text-left font-semibold px-4 w-28">
                   Required
                 </th>
-                <th className="py-2 text-left font-semibold">Description</th>
+                <th className="py-3 text-left font-semibold px-4">
+                  Description
+                </th>
               </tr>
             </thead>
             <tbody className="text-muted-foreground text-xs">
@@ -306,11 +308,11 @@ jobs:
                 ],
               ].map(([field, req, desc]) => (
                 <tr key={field} className="border-b border-border/50">
-                  <td className="py-3 px-4">
+                  <td className="py-4 px-4">
                     <code className="text-primary">{field}</code>
                   </td>
-                  <td className="py-3 px-4">{req}</td>
-                  <td className="py-3 px-4">{desc}</td>
+                  <td className="py-4 px-4">{req}</td>
+                  <td className="py-4 px-4">{desc}</td>
                 </tr>
               ))}
             </tbody>
